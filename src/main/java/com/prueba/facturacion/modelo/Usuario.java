@@ -1,14 +1,17 @@
 package com.prueba.facturacion.modelo;
 
+import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +30,9 @@ public class Usuario {
     @Column(name = "contrasena", length = 45, nullable = false)
     private String contrasena;
 
-    @Column(name = "id_perfil", nullable = false)
-    private Integer idPerfil;
+    @OneToOne
+    @JoinColumn(name = "id_perfil", nullable = false)
+    private Perfil perfil;
 
     public Integer getId() {
         return id;
@@ -70,11 +74,15 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public Integer getIdPerfil() {
-        return idPerfil;
+    public Usuario() {
     }
 
-    public void setIdPerfil(Integer idPerfil) {
-        this.idPerfil = idPerfil;
+    public Usuario(Integer id, String nombre, String apellido, String usuario, String contrasena, Perfil perfil) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.perfil = perfil;
     }
 }

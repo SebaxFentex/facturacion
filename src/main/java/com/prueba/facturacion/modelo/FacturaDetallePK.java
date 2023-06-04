@@ -1,10 +1,12 @@
 package com.prueba.facturacion.modelo;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class FacturaDetallePK{
+public class FacturaDetallePK implements Serializable{
     
     @Column(name = "CONSECUTIVO")
     private Integer consecutivo;
@@ -25,6 +27,11 @@ public class FacturaDetallePK{
     }
 
     public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public FacturaDetallePK(Integer consecutivo, Integer idProducto) {
+        this.consecutivo = consecutivo;
         this.idProducto = idProducto;
     }
 }

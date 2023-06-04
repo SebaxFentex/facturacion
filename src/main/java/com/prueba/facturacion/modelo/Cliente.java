@@ -1,12 +1,16 @@
 package com.prueba.facturacion.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,8 +22,9 @@ public class Cliente {
     @Column(name = "CLIENTE")
     private Integer id;
 
-    @Column(name = "TIPO_IDENTIFICACION")
-    private Integer tipoIdentificacion;
+    @ManyToOne
+    @JoinColumn(name = "TIPO_IDENTIFICACION")
+    private TipoIdentificacion tipoIdentificacion;
     
     @Column(name = "IDENTIFICACION", length = 100)
     private String identificacion;
@@ -33,20 +38,15 @@ public class Cliente {
     @Column(name = "ESTADO")
     private Character estado;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Factura> facturas;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getTipoIdentificacion() {
-        return tipoIdentificacion;
-    }
-
-    public void setTipoIdentificacion(Integer tipoIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
     }
 
     public String getIdentificacion() {
@@ -79,5 +79,19 @@ public class Cliente {
 
     public void setEstado(Character estado) {
         this.estado = estado;
+    }
+
+    public Cliente() {
+    }
+
+    public Cliente(Integer id, TipoIdentificacion tipoIdentificacion, String identificacion, String razonSocial,
+            LocalDate fechaRegistro, Character estado, List<Factura> facturas) {
+        this.id = id;
+        this.tipoIdentificacion = tipoIdentificacion;
+        this.identificacion = identificacion;
+        this.razonSocial = razonSocial;
+        this.fechaRegistro = fechaRegistro;
+        this.estado = estado;
+        this.facturas = facturas;
     }
 }

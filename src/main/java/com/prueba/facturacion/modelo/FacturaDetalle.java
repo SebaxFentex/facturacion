@@ -1,30 +1,33 @@
 package com.prueba.facturacion.modelo;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FACTURA_DETALLE")
+@IdClass(FacturaDetallePK.class)
 public class FacturaDetalle {
     
-    @EmbeddedId
-    private FacturaDetallePK id;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "CONSECUTIVO")
+    private Factura factura;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "ID_PRODUCTO")
+    private Producto producto;
 
     @Column(name = "CANTIDAD")
     private Integer cantidad;
 
     @Column(name = "VALOR_UNITARIO")
     private Integer valorUnitario;
-
-    public FacturaDetallePK getId() {
-        return id;
-    }
-
-    public void setId(FacturaDetallePK id) {
-        this.id = id;
-    }
 
     public Integer getCantidad() {
         return cantidad;
@@ -39,6 +42,16 @@ public class FacturaDetalle {
     }
 
     public void setValorUnitario(Integer valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
+    public FacturaDetalle() {
+    }
+
+    public FacturaDetalle(Factura factura, Producto producto, Integer cantidad, Integer valorUnitario) {
+        this.factura = factura;
+        this.producto = producto;
+        this.cantidad = cantidad;
         this.valorUnitario = valorUnitario;
     }
 }

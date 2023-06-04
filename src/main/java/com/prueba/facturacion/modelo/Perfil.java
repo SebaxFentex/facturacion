@@ -1,15 +1,18 @@
 package com.prueba.facturacion.modelo;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "perfil")
-public class Perfil {
+public class Perfil implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +21,9 @@ public class Perfil {
 
     @Column(name = "nombre", length = 13, nullable = false)
     private String nombre;
+
+    @OneToOne(mappedBy = "perfil")
+    private Usuario usuario;
 
     public Integer getId() {
         return id;
@@ -33,5 +39,14 @@ public class Perfil {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Perfil() {
+    }
+
+    public Perfil(Integer id, String nombre, Usuario usuario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.usuario = usuario;
     }
 }
