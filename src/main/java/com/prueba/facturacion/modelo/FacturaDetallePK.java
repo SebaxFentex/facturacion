@@ -9,17 +9,17 @@ import jakarta.persistence.Embeddable;
 public class FacturaDetallePK implements Serializable{
     
     @Column(name = "CONSECUTIVO")
-    private Integer consecutivo;
+    private Integer idFactura;
 
     @Column(name = "ID_PRODUCTO")
     private Integer idProducto;
 
     public Integer getConsecutivo() {
-        return consecutivo;
+        return idFactura;
     }
 
-    public void setConsecutivo(Integer consecutivo) {
-        this.consecutivo = consecutivo;
+    public void setConsecutivo(Integer idFactura) {
+        this.idFactura = idFactura;
     }
 
     public Integer getIdProducto() {
@@ -30,8 +30,8 @@ public class FacturaDetallePK implements Serializable{
         this.idProducto = idProducto;
     }
 
-    public FacturaDetallePK(Integer consecutivo, Integer idProducto) {
-        this.consecutivo = consecutivo;
+    public FacturaDetallePK(Integer idFactura, Integer idProducto) {
+        this.idFactura = idFactura;
         this.idProducto = idProducto;
     }
 }

@@ -30,7 +30,7 @@ public class Factura {
     private LocalDate fecha;
 
     @OneToMany(mappedBy = "factura")
-    private List<FacturaDetalle> facturas;
+    private List<FacturaDetalle> productos;
 
     public Integer getId() {
         return id;
@@ -51,10 +51,10 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(Integer id, Cliente cliente, LocalDate fecha, List<FacturaDetalle> facturas) {
+    public Factura(Integer id, Cliente cliente, LocalDate fecha, List<FacturaDetalle> productos) {
         this.id = id;
         this.cliente = cliente;
         this.fecha = fecha;
-        this.facturas = facturas;
+        this.productos = productos;
     }
 }

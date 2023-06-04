@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class TipoIdentificacion {
 
     @Id
-    @Column(name = "CLIENTE")
+    @Column(name = "TIPO_IDENTIFICACION")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
