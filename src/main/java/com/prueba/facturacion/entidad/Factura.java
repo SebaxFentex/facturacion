@@ -1,4 +1,4 @@
-package com.prueba.facturacion.modelo;
+package com.prueba.facturacion.entidad;
 
 import java.time.LocalDate;
 import java.util.List;

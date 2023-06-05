@@ -1,10 +1,12 @@
-package com.prueba.facturacion.modelo;
+package com.prueba.facturacion.entidad;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,7 +24,7 @@ public class Cliente {
     @Column(name = "CLIENTE")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "TIPO_IDENTIFICACION")
     private TipoIdentificacion tipoIdentificacion;
     
@@ -38,7 +40,7 @@ public class Cliente {
     @Column(name = "ESTADO")
     private Character estado;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Factura> facturas;
 
     public Integer getId() {
@@ -79,6 +81,14 @@ public class Cliente {
 
     public void setEstado(Character estado) {
         this.estado = estado;
+    }
+
+    public TipoIdentificacion getTipoIdentificacion() {
+        return tipoIdentificacion;
+    }
+
+    public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
+        this.tipoIdentificacion = tipoIdentificacion;
     }
 
     public Cliente() {
