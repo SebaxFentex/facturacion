@@ -1,5 +1,6 @@
 package com.prueba.facturacion.entidad;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -15,12 +16,12 @@ public class FacturaDetalle {
     @EmbeddedId
     private FacturaDetallePK facturaDetallePK;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @MapsId("id")
     @JoinColumn(name = "CONSECUTIVO")
     private Factura factura;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @MapsId("id")
     @JoinColumn(name = "ID_PRODUCTO")
     private Producto producto;

@@ -24,7 +24,7 @@ public class FacturaControlador {
     @Autowired
     public FacturaRepositorio facturaRepositorio;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Factura> listarFacturas(){
         return facturaRepositorio.findAll();
     }

@@ -24,7 +24,7 @@ public class Cliente {
     @Column(name = "CLIENTE")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "TIPO_IDENTIFICACION")
     private TipoIdentificacion tipoIdentificacion;
     

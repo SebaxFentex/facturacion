@@ -25,7 +25,7 @@ public class ProductoControlador {
     @Autowired
     private ProductoRepositorio productoRepositorio;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Producto> listarProductos(){
         return productoRepositorio.findAll();
     }

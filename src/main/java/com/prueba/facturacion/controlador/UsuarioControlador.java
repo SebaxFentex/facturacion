@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prueba.facturacion.entidad.Usuario;
 import com.prueba.facturacion.excepciones.NoEncontrado;
+import com.prueba.facturacion.repositorio.PerfilRepositorio;
 import com.prueba.facturacion.repositorio.UsuarioRepositorio;
 
 @RestController
@@ -25,7 +26,10 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
-    @GetMapping("/")
+    @Autowired
+    private PerfilRepositorio perfilRepositorio;
+
+    @GetMapping("")
     public List<Usuario> listarUsuarios(){
         return usuarioRepositorio.findAll();
     }
@@ -45,6 +49,7 @@ public class UsuarioControlador {
     public ResponseEntity<Usuario> modificarUsuario(@PathVariable Integer id, @RequestBody Usuario detallesUsuario){
         Usuario usuario = usuarioRepositorio.findById(id).orElseThrow(() -> new NoEncontrado("No existe el usuario " + id));
 
+        usuario.setPerfil(perfilRepositorio.findById(detallesUsuario.getPerfil().getId()).get());
         usuario.setNombre(detallesUsuario.getNombre());
         usuario.setApellido(detallesUsuario.getApellido());
         usuario.setUsuario(detallesUsuario.getUsuario());
